@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  turtlesim_node:
+    build: .
+    command: ros2 run turtlesim turtlesim_node
+    # command: ros2 run demo_nodes_cpp talker
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - "$HOME/.Xauthority:/root/.Xauthority:rw"
+    network_mode: host
+    pid: host
+    ipc: host
+  turtle_teleop:
+    build: .
+    command: ros2 run turtlesim turtle_teleop_key
+    # command: ros2 run demo_nodes_cpp listener
+    network_mode: host
+    pid: host
+    ipc: host
+    depends_on:
+      - turtlesim_node
+  turtle_debug:
+    build: .
+    command: rqt
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - "$HOME/.Xauthority:/root/.Xauthority:rw"
+    network_mode: host
+    pid: host
+    ipc: host
+    depends_on:
+      - turtlesim_node
