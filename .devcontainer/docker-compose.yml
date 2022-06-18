@@ -24,7 +24,6 @@ services:
       # hack for displaying GUI apps
       DISPLAY: ${DISPLAY}
 
-
     volumes:
       # hack for displaying GUI apps
       - "$HOME/.Xauthority:/root/.Xauthority:rw"
