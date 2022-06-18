@@ -1,18 +1,30 @@
 # see https://blog.mikesir87.io/2018/07/leveraging-multi-stage-builds-single-dockerfile-dev-prod/
 
 # pin to ROS2 humble & Ubuntu jammy for no reason
-FROM ros:humble-ros-base-jammy AS base1
-# RUN apt update && apt install -y python3-rosdep && rosdep init && rosdep update
+FROM ros:humble-ros-base-jammy AS dev
 WORKDIR /code
-# copy over package.xml per package as needed
-COPY src/ros_tutorials/turtlesim/package.xml src/turtlesim
+
+# copy over package.xml per package as needed to prevent rebuilding container
+# COPY src/ros_tutorials/turtlesim/package.xml src/turtlesim
+
+RUN mkdir src
 RUN apt update && \
   rosdep install -i --from-path src --rosdistro humble -y
 
-# allows sourcing any number of scripts at runtime via the $BEFORE_SHELL env var
-RUN echo 'a=(${BEFORE_SHELL//:/ }); for x in ${a[@]}; do source $x; done' >> ~/.bashrc
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
+
+FROM dev as build
+WORKDIR /app
+COPY --from=dev /code .
+RUN colcon build
+
+FROM dev as prod
+WORKDIR /app
+RUN rm -rf /code
+COPY --from=build /app .
+RUN . install/setup.sh
+CMD ["ros2","run","turtlesim","turtle_teleop"]
 
 # apparently a new terminal has to be used to prevent some issue?
 

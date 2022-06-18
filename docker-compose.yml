@@ -1,26 +1,28 @@
 version: "3.9"
 services:
-  dev:
-    build:
-      context: .
-      target: base1
-    
-    stdin_open: true
-    tty: true 
-    
-    # hack for displaying X Applications within a container
-    environment:
-      DISPLAY: ${DISPLAY}
-      BEFORE_SHELL: /code/build.sh
-    volumes:
-      - "$HOME/.Xauthority:/root/.Xauthority:rw"
-      # mount the workspace folder for live changes
-      - ".:/code/:rw"
-
-    # expose ROS fully to host for inter-container communication (discouraged)
-    network_mode: host
-    pid: host
-    ipc: host
+  prod:
+    build: .
+  # dev:
+  #   build:
+  #     context: .
+  #     target: dev
+  #   
+  #   stdin_open: true
+  #   tty: true 
+  #   
+  #   # hack for displaying X Applications within a container
+  #   environment:
+  #     DISPLAY: ${DISPLAY}
+  #     BEFORE_SHELL: /code/build-dev.sh
+  #   volumes:
+  #     - "$HOME/.Xauthority:/root/.Xauthority:rw"
+  #     # mount the workspace folder for live changes
+  #     - ".:/code/:rw"
+  # 
+  #   # expose ROS fully to host for inter-container communication (discouraged)
+  #   network_mode: host
+  #   pid: host
+  #   ipc: host
   
 
   # turtlesim_node:

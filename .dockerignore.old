@@ -1,3 +1,5 @@
+# TODO: how to dockerignore only for prod builds + what to ignore?
+
 build
 install
 log
