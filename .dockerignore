@@ -1,0 +1,12 @@
+build
+install
+log
+
+**/.dockerignore
+**/.gitattributes
+**/.gitmodules
+**/.gitignore
+**/.git
+**/docker-compose*
+**/Dockerfile*
+**/README.md
