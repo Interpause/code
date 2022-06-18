@@ -9,7 +9,8 @@ WORKDIR /code
 
 RUN mkdir src
 RUN apt update && \
-  rosdep install -i --from-path src --rosdistro humble -y
+  rosdep install -i --from-path src --rosdistro humble -y && \
+  apt install -y ~nros-humble-rqt*
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
@@ -19,6 +20,7 @@ WORKDIR /app
 COPY --from=dev /code .
 RUN colcon build
 
+# TODO: is there a way to start from a fresh image? dev stage has bloat in it
 FROM dev as prod
 WORKDIR /app
 RUN rm -rf /code
@@ -36,4 +38,3 @@ CMD ["ros2","run","turtlesim","turtle_teleop"]
 
 # RUN apt update && apt install -y ros-humble-turtlesim
 # RUN apt install -y ros-humble-demo-nodes-cpp
-# RUN apt install -y ~nros-humble-rqt*
