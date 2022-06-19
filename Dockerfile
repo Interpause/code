@@ -10,6 +10,7 @@ CMD ["bash"]
 FROM ros:humble-ros-core-jammy as build
 WORKDIR /code
 COPY . .
+RUN . /opt/ros/humble/setup.sh
 RUN rosdep install -i --from-path src --rosdistro humble -y && colcon build
 
 # TODO: is there a way to start from a fresh image? dev stage has bloat in it
