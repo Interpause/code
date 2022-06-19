@@ -5,9 +5,9 @@ FROM ros:humble-ros-base-jammy AS dev
 WORKDIR /code
 
 # copy over package.xml per package as needed to prevent rebuilding container
+RUN mkdir src
 # COPY src/ros_tutorials/turtlesim/package.xml src/turtlesim
 
-RUN mkdir src
 RUN apt update && \
   rosdep install -i --from-path src --rosdistro humble -y && \
   apt install -y ~nros-humble-rqt*

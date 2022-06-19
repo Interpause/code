@@ -23,7 +23,20 @@
 	// "shutdownAction": "none",
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
 	"postCreateCommand": ". hooks/postCreate.sh",
-	"postStartCommand": ". hooks/postStart.sh"
+	"postStartCommand": ". hooks/postStart.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"njpwerner.autodocstring",
+				"bungcip.better-toml",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"DavidAnson.vscode-markdownlint",
+				"esbenp.prettier-vscode",
+				"ms-python.vscode-pylance",
+				"ms-python.python"
+			]
+		}
+	}
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 }
