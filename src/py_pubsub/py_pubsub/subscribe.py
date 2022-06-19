@@ -6,7 +6,7 @@ import sys
 import rclpy
 from std_msgs.msg import String
 
-from py_pubsub.nice_node import NiceNode
+from py_pubsub.job import NiceNode
 
 
 @dataclass(eq=False)
