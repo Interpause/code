@@ -1,5 +1,5 @@
 from __future__ import annotations
-from example_interfaces.srv import AddTwoInts
+from tutorial_interfaces.srv import AddThreeInts
 
 import rclpy
 from rclpy.node import Node
@@ -8,11 +8,11 @@ class AddService(Node):
 
     def __init__(self):
         super().__init__('minimal_add_service')
-        self._srv = self.create_service(AddTwoInts, 'add_two_ints', self._cb)
+        self._srv = self.create_service(AddThreeInts, 'add_three_ints', self._cb)
 
-    def _cb(self, req: AddTwoInts.Request, res: AddTwoInts.Response):
-        res.sum = req.a + req.b
-        self.get_logger().info(f'Request: {req.a} + {req.b} = {res.sum}')
+    def _cb(self, req: AddThreeInts.Request, res: AddThreeInts.Response):
+        res.sum = req.a + req.b + req.c
+        self.get_logger().info(f'Request: {req.a} + {req.b} + {req.c} = {res.sum}')
         return res
 
 
