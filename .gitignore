@@ -52,3 +52,6 @@ CATKIN_IGNORE
 
 /install
 /log
+
+# cpp debug symbols
+/.vscode/browse.vc.db*

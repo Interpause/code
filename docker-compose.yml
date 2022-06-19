@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   prod:
     build: .
@@ -6,7 +6,7 @@ services:
   #   build:
   #     context: .
   #     target: dev
-  #   
+  #
   #   # hack for displaying X Applications within a container
   #   environment:
   #     DISPLAY: ${DISPLAY}
@@ -14,7 +14,7 @@ services:
   #     - "$HOME/.Xauthority:/root/.Xauthority:rw"
   #     # mount the workspace folder for live changes
   #     - ".:/code/:rw"
-  # 
+  #
   #   # expose ROS fully to host for inter-container communication (discouraged)
   #   network_mode: host
   #   pid: host
