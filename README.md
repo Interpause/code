@@ -19,3 +19,7 @@ Why do X Servers for Windows still exist inspite of WSL2 now having the ability 
 ## Intellisense & Other Extensions
 
 If using VSCode, they will auto-install. I am guessing they intend for `.devcontainer` to become a standard, but clearly including extensions is non-standard. Anyways, _Pylance won't work correctly on a fresh-install_, close & reopen (or reload) VSCode at least once for it to work. Don't ask me why.
+
+### Import Resolution
+
+Right now, Pylance is configured to resolve all packages in the `src` folder. This isn't exactly correct behaviour, so refrain from importing stuff across the ROS package boundary without actually declaring said package as a dependency.
