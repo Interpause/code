@@ -5,11 +5,11 @@ from tutorial_interfaces.srv import AddThreeInts
 import rclpy
 from rclpy.node import Node
 
-class AddClient(Node):
 
+class AddClient(Node):
     def __init__(self):
-        super().__init__('add_client')
-        self._cli = self.create_client(AddThreeInts, 'add_three_ints')
+        super().__init__("add_client")
+        self._cli = self.create_client(AddThreeInts, "add_three_ints")
         self._req = AddThreeInts.Request()
 
     def send_request(self, a: int, b: int, c: int):
@@ -18,7 +18,7 @@ class AddClient(Node):
         self._req.c = c
 
         while not self._cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('Service not available, waiting...')
+            self.get_logger().info("Service not available, waiting...")
 
         self.future = self._cli.call_async(self._req)
 
@@ -26,7 +26,7 @@ class AddClient(Node):
 def main():
     rclpy.init()
 
-    a,b,c = sys.argv[1:4]
+    a, b, c = sys.argv[1:4]
     client = AddClient()
     client.send_request(int(a), int(b), int(c))
 
@@ -36,14 +36,15 @@ def main():
             try:
                 res = client.future.result()
             except Exception as e:
-                client.get_logger().info(f'Service call failed {e}')
+                client.get_logger().info(f"Service call failed {e}")
             else:
-                client.get_logger().info(f'Result: {a} + {b} + {c} = {res.sum}')
+                client.get_logger().info(f"Result: {a} + {b} + {c} = {res.sum}")
 
             break
 
     client.destroy_node()
     rclpy.shutdown()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
