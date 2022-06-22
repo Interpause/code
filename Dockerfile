@@ -7,6 +7,10 @@ RUN apt update && apt install -y ~nros-humble-rqt*
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
 
+# TODO: maybe use ros-desktop instead which has all the debugging & tutorial tools
+# included...
+# Need to build Dockerfiles resilient to rebuilding offline or with private registry
+
 FROM ros:humble-ros-core-jammy as build
 WORKDIR /code
 COPY . .

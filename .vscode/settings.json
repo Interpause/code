@@ -12,5 +12,7 @@
     "/opt/ros/humble/local/lib/python3.10/dist-packages",
   ],
   "python.languageServer": "Pylance",
-  "ros.distro": "humble"
+  "ros.distro": "humble",
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black"
 }
