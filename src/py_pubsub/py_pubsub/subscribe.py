@@ -2,11 +2,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 import sys
 
-
 import rclpy
 from std_msgs.msg import String
 
-from py_pubsub.job import NiceNode
+from py_pubsub.old import NiceNode
 
 
 @dataclass(eq=False)
@@ -20,14 +19,11 @@ class Subscriber(NiceNode):
         super(Subscriber, self).__post_init__()
 
         self._subscriber = self.create_subscription(
-            String,
-            self.topic,
-            self._listen_cb,
-            10)
+            String, self.topic, self._listen_cb, 10
+        )
 
     def _listen_cb(self, msg: String):
         self._log.info(f"Received: {msg.data}")
-
 
 
 def main(args=None):
