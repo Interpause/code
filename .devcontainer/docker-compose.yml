@@ -33,7 +33,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
     # needed as part of hack for displaying GUI apps
-    network_mode: host
+    # network_mode: host
+    ipc: host #'service:donor'
+    pid: host #'service:donor'
+    #depends_on:
+    #  - donor
 
     # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
     cap_add:
@@ -42,4 +46,21 @@ services:
       - seccomp:unconfined
 
     # Overrides default command so things don't shut down after the process ends.
-    command: /bin/sh -c "while sleep 1000; do :; done"
+    # command: /bin/sh -c "while sleep 1000; do :; done"
+    command: /bin/sh -c ". install/local_setup.sh && ros2 run py_pubsub listener"
+
+  test:
+    build:
+      context: .
+      target: dev
+
+    # network_mode: host
+    ipc: host #'service:donor'
+    pid: host #'service:donor'
+
+    volumes:
+      - .:/code:cached
+    #depends_on:
+    #  - donor
+
+    command: /bin/sh -c ". install/local_setup.sh && ros2 run py_pubsub talker"

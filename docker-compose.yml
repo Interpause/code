@@ -1,6 +1,11 @@
 version: '3.9'
 services:
-  {}
+  donor:
+    image: alpine
+    ipc: shareable
+    pid: shareable
+    stop_signal: SIGKILL
+    command: sleep infinity
   # prod:
   #  build: .
   # dev:
