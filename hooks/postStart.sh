@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # postStart.sh is called every time the container starts by devcontainer.json
 # it can be for misc tasks like ensuring all dependencies are installed.

@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # postCreate.sh is called after the container is created by devcontainer.json
 # it can be used to install & setup tools not wanted in the Dockerfile.
